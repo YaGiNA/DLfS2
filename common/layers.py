@@ -19,3 +19,18 @@ class MatMul:
         dW = np.dot(self.x.T, dout)
         self.grads[0][...] = dW
         return dx
+
+
+class Sygmoid:
+    def __init__(self):
+        self.params, self.grads = [], []
+        self.out = None
+
+    def forward(self, x):
+        out = 1 / (1 + np.exp(-x))
+        self.out = out
+        return out
+
+    def backward(self, dout):
+        dx = dout * (1.0 - self.out) * self.out
+        return dx
