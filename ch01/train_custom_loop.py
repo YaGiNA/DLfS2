@@ -1,5 +1,5 @@
 import sys
-sys.path.append("..")   #In order to import from parent dir.
+sys.path.append("..")   # In order to import from parent dir.
 import numpy as np
 from common.optimizer import SGD
 from dataset import spiral
@@ -31,12 +31,12 @@ for epoch in range(max_epoch):
     t = t[idx]
 
     for iters in range(max_iters):
-        batch_x = x[iters * batch_size:(iters + 1) * batch_size]
-        batch_t t[iters*batch_size:(iters+1)*batch_size]
+        batch_x = x[iters*batch_size:(iters+1)*batch_size]
+        batch_t = t[iters*batch_size:(iters+1)*batch_size]
 
         # Phase4: Get loss, update parameter
         loss = model.forward(batch_x, batch_t)
-        model.backward
+        model.backward()
         optimizer.update(model.params, model.grads)
 
         total_loss += loss
@@ -76,7 +76,7 @@ plt.axis("off")
 x, y = spiral.load_data()
 N = 100
 CLS_NUM = 3
-makers = ["o", "x", "^"]
+markers = ["o", "x", "^"]
 for i in range(CLS_NUM):
-    plt.scatter(x[i*N:(i+1)*N, 0], x[i*N:(i+1)*N, 1], s=40, maker=makers[i])
+    plt.scatter(x[i*N:(i+1)*N, 0], x[i*N:(i+1)*N, 1], s=40, marker=markers[i])
 plt.show()

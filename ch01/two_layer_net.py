@@ -5,7 +5,7 @@ from common.layers import Affine, Sigmoid, SoftmaxWithLoss
 
 
 class TwoLayerNet:
-    def __init__(self, imput_size, hidden_size, output_size):
+    def __init__(self, input_size, hidden_size, output_size):
         I, H, O = input_size, hidden_size, output_size
 
         # Initialize of weight & bias
