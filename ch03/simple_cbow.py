@@ -23,7 +23,7 @@ class SimpleCBOW:
         self.params, self.grads = [], []
         for layer in layers:
             self.params += layer.params
-            self.grads += layer.params
+            self.grads += layer.grads
 
         # set word representations @ member vars.
         self.word_vecs = W_in
