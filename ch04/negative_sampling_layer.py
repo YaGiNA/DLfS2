@@ -47,7 +47,7 @@ class UnigramSampler:
             self.word_p[i] = counts[i]
 
         self.word_p = np.power(self.word_p, power)
-        self.word_p = np.sum(self.word_p)
+        self.word_p /= np.sum(self.word_p)
 
     def get_negative_sample(self, target):
         batch_size = target.shape[0]
