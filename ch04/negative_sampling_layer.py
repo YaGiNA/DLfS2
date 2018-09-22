@@ -16,7 +16,7 @@ class EmbeddingDot:
         target_W = self.embed.forward(idx)
         out = np.sum(target_W * h, axis=1)
 
-        self.cache = (h, target_w)
+        self.cache = (h, target_W)
         return out
 
     def backward(self, dout):
@@ -104,7 +104,7 @@ class NegativeSamplingLoss:
         for i in range(self.sample_size):
             negative_target = negative_sample[:, i]
             score = self.embed_dot_layers[1 + i].forward(h, negative_target)
-            loss += self.loss_layers[1 + i].forward(score, negative_target)
+            loss += self.loss_layers[1 + i].forward(score, negative_label)
 
         return loss
 
