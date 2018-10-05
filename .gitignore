@@ -111,3 +111,4 @@ venv.bak/
 
 # text file
 *.txt
+.vscode
