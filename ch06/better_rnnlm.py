@@ -7,10 +7,8 @@ from typing import List
 
 
 class BetterRnnlm(BaseModel):
-    def __init__(
-            self, vocab_size: int=10000, wordvec_size: int=650,
-            hidden_size: int=650, dropout_ratio: float=0.5
-        ) -> None:
+    def __init__(self, vocab_size=10000, wordvec_size=650,
+                 hidden_size=650, dropout_ratio=0.5):
         V, D, H = vocab_size, wordvec_size, hidden_size
         rn = np.random.randn
 
@@ -42,24 +40,24 @@ class BetterRnnlm(BaseModel):
             self.params += layer.params
             self.grads += layer.grads
 
-    def predict(self, xs: List[float], train_flg: bool=False) -> List[float]:
+    def predict(self, xs, train_flg=False):
         for layer in self.drop_layers:
             layer.train_flg = train_flg
         for layer in self.layers:
             xs = layer.forward(xs)
         return xs
 
-    def forward(self, xs: List[float], ts: List[float], train_flg: bool=False) -> float:
+    def forward(self, xs, ts, train_flg=True):
         score = self.predict(xs, train_flg)
         loss = self.loss_layer.forward(score, ts)
         return loss
 
-    def backward(self, dout: float=1) -> float:
+    def backward(self, dout=1):
         dout = self.loss_layer.backward(dout)
         for layer in reversed(self.layers):
             dout = layer.backward(dout)
         return dout
 
-    def reset_state(self) -> None:
+    def reset_state(self):
         for layer in self.lstm_layers:
             layer.reset_state()
