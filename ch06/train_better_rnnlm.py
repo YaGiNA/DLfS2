@@ -54,3 +54,8 @@ for epoch in range(max_epoch):
         optimizer.lr = lr
     model.reset_state()
     print('-' * 50)
+
+# Evaluate by test data
+model.reset_state()
+ppl_test = eval_perplexity(model, corpus_test)
+print('test perplexity: ', ppl_test)
